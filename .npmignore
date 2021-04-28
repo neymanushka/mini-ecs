@@ -1,0 +1,8 @@
+coverage/
+node_modules/
+tsconfig.json
+.travis.yml
+yarn.lock
+jest.config.js
+**/__tests__/*
+prod.config.js

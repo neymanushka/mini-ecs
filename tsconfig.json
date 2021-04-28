@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"strict": true,
+        "module": "esNext",
+        "declaration": true,
+        "sourceMap": true,
+		"target": "es6",
+		"esModuleInterop": true,
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"allowSyntheticDefaultImports": true
+	},
+	"include": ["src/*.ts"],
+    "outDir": "/"
+}
