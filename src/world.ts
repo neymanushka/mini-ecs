@@ -5,7 +5,7 @@ import { Entity } from './entity';
 import { System } from './system';
 
 export class World {
-	nextId: number = 1;
+	nextId = 1;
 
 	components: Map<string, number> = new Map();
 	entities: Map<string, Entity> = new Map();
@@ -18,7 +18,7 @@ export class World {
 		this.systems.set(system.constructor.name, system);
 	}
 
-	update(...args: any) {
+	update(...args: unknown[]): void {
 		for (const system of this.systems.values()) {
 			system.update(...args);
 		}
@@ -43,7 +43,7 @@ export class World {
 		}
 	}
 
-	createQuery(ctors: (new (...args: any[]) => Component)[] = []): Query {
+	createQuery(ctors: (new () => Component)[] = []): Query {
 		const mask = new FastBitSet();
 		ctors.forEach((ctor) => mask.add(this.registerComponent(ctor.name)));
 
@@ -69,7 +69,7 @@ export class World {
 		return bit;
 	}
 
-	removeEntity(entity: Entity) {
+	removeEntity(entity: Entity): void {
 		entity.removed = true;
 		this.removedEntities.add(entity);
 	}

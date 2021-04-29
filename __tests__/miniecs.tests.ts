@@ -3,7 +3,6 @@ import { System } from '../src/system';
 import { Component } from '../src/component';
 
 const world = new World();
-
 class TestComponent0 implements Component {
 	value = 'some value zero';
 }
@@ -39,7 +38,7 @@ describe('World', () => {
 			const id = 'myEntityId';
 			const entity = world.addEntity(id);
 			expect(entity).toBeDefined();
-			expect(world.entities.has(id)).toBeTruthy();
+			expect(world.entities.has(id)).toBe(true);
 		});
 	});
 	describe('Query', () => {
@@ -107,7 +106,7 @@ describe('World', () => {
 			world.registerSystem(new TestSystem(world));
 			expect(world.systems).toBeDefined();
 			expect(world.systems.size).toBe(1);
-			expect(world.systems.has(TestSystem.name)).toBeTruthy();
+			expect(world.systems.has(TestSystem.name)).toBe(true);
 		});
 		it('run system and pass value to update method', () => {
 			const testString = 'someTestValue';

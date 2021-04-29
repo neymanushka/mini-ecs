@@ -1,13 +1,12 @@
 import { World } from './world';
 import { Component } from './component';
 import FastBitSet from 'fastbitset';
-
 export class Entity {
 	world: World;
 	mask: FastBitSet;
 	id: string;
 	components: Map<string, Component>;
-	removed: boolean = false;
+	removed = false;
 
 	constructor(id: string, world: World) {
 		this.world = world;
@@ -16,7 +15,7 @@ export class Entity {
 		this.components = new Map();
 	}
 
-	getComponent<T extends Component>(ctor: new (...args: any[]) => T): T {
+	getComponent<T extends Component>(ctor: new () => T): T {
 		return this.components.get(ctor.name) as T;
 	}
 

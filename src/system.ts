@@ -1,3 +1,3 @@
 export interface System {
-	update(...args: any): void;
+	update(...args: unknown[]): void;
 }

@@ -19,6 +19,7 @@
 	},
 	"homepage": "https://github.com/neymanushka/mini-ecs#readme",
 	"scripts": {
+		"lint": "eslint --ext .ts,.js --ignore-path .gitignore .",
 		"build": "rollup --config prod.config.js",
 		"tests": "jest"
 	},
@@ -34,6 +35,7 @@
 		"@typescript-eslint/eslint-plugin": "^4.22.0",
 		"@typescript-eslint/parser": "^4.22.0",
 		"eslint": "^7.24.0",
+		"eslint-plugin-jest": "^24.3.6",
 		"eslint-plugin-prettier": "^3.3.1",
 		"jest": "^26.6.3",
 		"prettier": "^2.2.1",
