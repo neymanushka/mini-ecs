@@ -43,7 +43,7 @@ export class World {
 		}
 	}
 
-	createQuery(ctors: (new () => Component)[] = []): Query {
+	createQuery(ctors: (new () => Component)[]): Query {
 		const mask = new FastBitSet();
 		ctors.forEach((ctor) => mask.add(this.registerComponent(ctor.name)));
 

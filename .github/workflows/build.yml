@@ -1,5 +1,4 @@
-
-name: Tests
+name: Build
 
 on:
   push:
@@ -17,3 +16,8 @@ jobs:
       - run: npm ci
       - run: npm run-script build
       - run: npm run-script tests
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
