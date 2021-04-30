@@ -1,5 +1,5 @@
 ![Build Status](https://github.com/neymanushka/mini-ecs/actions/workflows/build.yml/badge.svg)
-[![Coverage Status](https://coveralls.io/repos/github/neymanushka/mini-ecs/badge.svg)](https://coveralls.io/github/neymanushka/mini-ecs)
+[![Coverage Status](https://coveralls.io/repos/github/neymanushka/mini-ecs/badge.svg?branch=master&service=github)](https://coveralls.io/github/neymanushka/mini-ecs)
 
 # lightweight ECS library
 
