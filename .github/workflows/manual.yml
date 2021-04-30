@@ -1,17 +1,23 @@
 name: Manual
 
-on: 
+on:
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - name: npm install, test-coverage
+        - uses: actions/checkout@v2
+        - uses: actions/setup-node@v2
+          with:
+            node-version: 12
+        - run: npm ci
+        - run: npm run-script lint
+        - run: npm run-script build
+        - run: npm run-script tests
+
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
         with:
-          node-version: 12
-      - run: npm ci
-      - run: npm run-script lint
-      - run: npm run-script build
-      - run: npm run-script tests
+          github-token: ${{ secrets.GITHUB_TOKEN }}
