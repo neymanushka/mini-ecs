@@ -4,6 +4,8 @@ import { Query } from './query';
 import { Entity } from './entity';
 import { System } from './system';
 
+/*eslint-disable-next-line @typescript-eslint/no-explicit-any */
+export type Constructor<T extends unknown> = new (...args: any[]) => T;
 export class World {
 	nextId = 1;
 
@@ -43,7 +45,7 @@ export class World {
 		}
 	}
 
-	createQuery(ctors: (new () => Component)[]): Query {
+	createQuery(ctors: Constructor<Component>[]): Query {
 		const mask = new FastBitSet();
 		ctors.forEach((ctor) => mask.add(this.registerComponent(ctor.name)));
 

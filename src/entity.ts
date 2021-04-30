@@ -1,4 +1,4 @@
-import { World } from './world';
+import { World, Constructor } from './world';
 import { Component } from './component';
 import FastBitSet from 'fastbitset';
 export class Entity {
@@ -15,7 +15,7 @@ export class Entity {
 		this.components = new Map();
 	}
 
-	getComponent<T extends Component>(ctor: new () => T): T {
+	getComponent<T>(ctor: Constructor<T>): T {
 		return this.components.get(ctor.name) as T;
 	}
 
@@ -27,7 +27,7 @@ export class Entity {
 		return this;
 	}
 
-	removeComponent<T extends Component>(ctor: new () => T): void {
+	removeComponent<T>(ctor: Constructor<T>): void {
 		const bit = this.world.registerComponent(ctor.name);
 		this.mask.remove(bit);
 		this.components.delete(ctor.name);
