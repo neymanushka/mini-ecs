@@ -2,7 +2,6 @@ import { World } from '../src/world';
 import { System } from '../src/system';
 import { Component } from '../src/component';
 
-const world = new World();
 class TestComponent0 implements Component {
 	value = 'some value zero';
 }
@@ -12,8 +11,17 @@ class TestComponent1 implements Component {
 class TestComponent3 implements Component {
 	value = 'some value two';
 }
+class TestComponentWithArgs implements Component {
+	numberValue: number;
+	stringValue: string;
+	constructor(numberValue: number, stringValue: string) {
+		this.numberValue = numberValue;
+		this.stringValue = stringValue;
+	}
+}
 
 describe('World', () => {
+	const world = new World();
 	it('init', () => {
 		expect(world).toBeDefined();
 	});
@@ -40,8 +48,21 @@ describe('World', () => {
 			expect(entity).toBeDefined();
 			expect(world.entities.has(id)).toBe(true);
 		});
+		it('add components with args', () => {
+			const entity = world.addEntity();
+			entity
+				.addComponent(new TestComponent0())
+				.addComponent(new TestComponentWithArgs(12345, 'test12345'));
+			const component = entity.getComponent(TestComponentWithArgs);
+			expect(entity).toBeDefined();
+			expect(entity.components.size).toBe(2);
+			expect(component).toBeDefined();
+			expect(component.numberValue).toBe(12345);
+			expect(component.stringValue).toBe('test12345');
+		});
 	});
 	describe('Query', () => {
+		const world = new World();
 		const entity0 = world.addEntity();
 		entity0.addComponent(new TestComponent0());
 		entity0.addComponent(new TestComponent1());
@@ -89,8 +110,24 @@ describe('World', () => {
 			entity1.removeComponent(TestComponent0);
 			expect(query.entities.size).toBe(1);
 		});
+		test('iterate through entities', () => {
+			const entity = world.addEntity();
+			entity
+				.addComponent(new TestComponent0())
+				.addComponent(new TestComponentWithArgs(12345, 'test12345'));
+			const query = world.createQuery([TestComponent0, TestComponentWithArgs]);
+
+			query.entities.forEach((entity) => {
+				const testComponent0 = entity.getComponent(TestComponent0);
+				expect(testComponent0).toBeDefined();
+				const testComponent1 = entity.getComponent(TestComponent0);
+				expect(testComponent1).toBeDefined();
+			});
+		});
 	});
 	describe('System', () => {
+		const world = new World();
+
 		let testValue: string;
 		class TestSystem implements System {
 			world: World;

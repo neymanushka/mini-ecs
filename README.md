@@ -1,5 +1,8 @@
 ![Build Status](https://github.com/neymanushka/mini-ecs/actions/workflows/build.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/neymanushka/mini-ecs/badge.svg?branch=master&service=github)](https://coveralls.io/github/neymanushka/mini-ecs)
+[![NPM](https://img.shields.io/npm/v/@robatbobat/mini-ecs?color=blue)](https://www.npmjs.com/package/@robatbobat/mini-ecs)
+[![NPM](https://img.shields.io/npm/dw/@robatbobat/mini-ecs?color=blue)](https://www.npmjs.com/package/@robatbobat/mini-ecs)
+[![MIT License](https://img.shields.io/github/license/neymanushka/mini-ecs)](LICENSE)
 
 # lightweight ECS library
 
@@ -120,9 +123,11 @@ entity will be removed only at the end of `world.update()`
 
 ## Example project:
 
-```
-coming soon..
-```
+### [live demo ](https://neymanushka.github.io/mini-ecs-example-project)
+
+repo can be found [here](https://github.com/neymanushka/mini-ecs-example-project)
+
+---
 
 ## License
 
