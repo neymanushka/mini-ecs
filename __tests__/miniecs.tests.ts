@@ -60,6 +60,13 @@ describe('World', () => {
 			expect(component.numberValue).toBe(12345);
 			expect(component.stringValue).toBe('test12345');
 		});
+		it('does entity have this component', () => {
+			const entity = world.addEntity();
+			entity.addComponent(new TestComponent0()).addComponent(new TestComponent3());
+			expect(entity.hasComponent(TestComponent0)).toBe(true);
+			expect(entity.hasComponent(TestComponent3)).toBe(true);
+			expect(entity.hasComponent(TestComponent1)).toBe(false);
+		});
 	});
 	describe('Query', () => {
 		const world = new World();

@@ -33,4 +33,8 @@ export class Entity {
 		this.components.delete(ctor.name);
 		this.world.updateQueries(this);
 	}
+
+	hasComponent<T>(ctor: Constructor<T>): boolean {
+		return this.components.has(ctor.name);
+	}
 }
