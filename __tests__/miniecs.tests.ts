@@ -1,6 +1,7 @@
 import { World } from '../src/world';
 import { System } from '../src/system';
 import { Component } from '../src/component';
+import { Entity } from '../src/entity';
 
 class TestComponent0 implements Component {
 	value = 'some value zero';
@@ -117,7 +118,7 @@ describe('World', () => {
 			entity1.removeComponent(TestComponent0);
 			expect(query.entities.size).toBe(1);
 		});
-		test('iterate through entities', () => {
+		it('iterate through entities', () => {
 			const entity = world.addEntity();
 			entity
 				.addComponent(new TestComponent0())
@@ -130,6 +131,33 @@ describe('World', () => {
 				const testComponent1 = entity.getComponent(TestComponent0);
 				expect(testComponent1).toBeDefined();
 			});
+		});
+		it('notify observers', () => {
+			const entity = world.addEntity();
+			const query0 = world.createQuery([TestComponent0]);
+			const query1 = world.createQuery([TestComponent1]);
+			let onAddEntity, onRemoveEntity;
+
+			query0.onAddObservable.add((entity: Entity) => {
+				onAddEntity = entity;
+			});
+			query1.onRemoveObservable.add((entity: Entity) => {
+				onRemoveEntity = entity;
+			});
+
+			entity.addComponent(new TestComponent1());
+			expect(onAddEntity).toBeUndefined();
+
+			entity.addComponent(new TestComponent0());
+			expect(onAddEntity).toBeDefined();
+			expect(onAddEntity).toEqual(entity);
+
+			entity.removeComponent(TestComponent0);
+			expect(onRemoveEntity).toBeUndefined();
+
+			entity.removeComponent(TestComponent1);
+			expect(onAddEntity).toBeDefined();
+			expect(onRemoveEntity).toEqual(entity);
 		});
 	});
 	describe('System', () => {

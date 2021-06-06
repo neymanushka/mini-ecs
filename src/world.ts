@@ -26,7 +26,7 @@ export class World {
 		}
 		for (const entity of this.removedEntities.values()) {
 			for (const query of this.queries.values()) {
-				query.entities.delete(entity.id);
+				query.removeEntity(entity);
 			}
 			this.entities.delete(entity.id);
 		}
@@ -38,9 +38,9 @@ export class World {
 			const diff = query.mask.difference_size(entity.mask);
 			const has = query.entities.has(entity.id);
 			if (!has && diff === 0) {
-				query.entities.set(entity.id, entity);
+				query.addEntity(entity);
 			} else if (has && diff !== 0) {
-				query.entities.delete(entity.id);
+				query.removeEntity(entity);
 			}
 		}
 	}
@@ -55,7 +55,7 @@ export class World {
 		if (!query) {
 			query = new Query(mask);
 			for (const entity of this.entities.values()) {
-				if (mask.difference_size(entity.mask) === 0) query.entities.set(entity.id, entity);
+				if (mask.difference_size(entity.mask) === 0) query.addEntity(entity);
 			}
 			this.queries.set(queryKey, query);
 		}
